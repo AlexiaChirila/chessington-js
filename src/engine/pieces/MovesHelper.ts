@@ -67,3 +67,7 @@ export function getAvailableMovesKing(board: Board, position: Square)  {
 
     return moves;
 }
+
+export function checkAvailableMove(board: Board, position: Square)  {
+    return board.getPiece(position) === undefined;
+}
