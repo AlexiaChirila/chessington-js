@@ -134,3 +134,37 @@ export function getAvailableMovesKing(board: Board, position: Square, currentPla
 export function checkAvailableMove(board: Board, position: Square)  {
     return board.getPiece(position) === undefined;
 }
+
+export function getAvailableTakesForPawn(board: Board, position: Square, currentPlayer:Player)  {
+    let moves:Square[] = [];
+
+    if(currentPlayer===Player.WHITE) {
+
+         if(position.row+1<=7)
+        {
+
+            if(board.getPiece(new Square(position.row+1,position.col+1))?.player === Player.BLACK && !(board.getPiece(new Square(position.row+1,position.col+1)) instanceof King) ) {
+                moves.push(new Square(position.row+1,position.col+1));
+            }
+
+            if(board.getPiece(new Square(position.row+1,position.col-1))?.player === Player.BLACK && !(board.getPiece(new Square(position.row+1,position.col-1)) instanceof King)) {
+                moves.push(new Square(position.row+1,position.col-1));
+            }
+        }
+
+    } else {
+        if(position.row-1>=0)
+        {
+
+            if(board.getPiece(new Square(position.row-1,position.col+1))?.player===Player.WHITE && !(board.getPiece(new Square(position.row-1,position.col+1)) instanceof King)) {
+                moves.push(new Square(position.row-1,position.col+1));
+            }
+
+            if(board.getPiece(new Square(position.row-1,position.col-1))?.player===Player.WHITE && !(board.getPiece(new Square(position.row-1,position.col-1)) instanceof King)) {
+                moves.push(new Square(position.row-1,position.col-1));
+            }
+        }
+    }
+    return moves;
+
+}
