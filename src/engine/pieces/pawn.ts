@@ -14,7 +14,7 @@ export default class Pawn extends Piece {
         let moves:Square[] = [];
         if(this.player===Player.WHITE)
         {
-            if(position.row<6)
+            if(position.row===1)
             {
                 moves.push(new Square(position.row+1,position.col));
                 moves.push(new Square(position.row+2,position.col));
@@ -23,15 +23,15 @@ export default class Pawn extends Piece {
             {
                 moves.push(new Square(position.row+1,position.col));
             }
+
         }
         else
         {
-            if(position.row>1)
+            if(position.row===6)
             {
                 moves.push(new Square(position.row-1,position.col));
                 moves.push(new Square(position.row-2,position.col));
-            }
-            else if(position.row>0)
+            } else if(position.row>0)
             {
                 moves.push(new Square(position.row-1,position.col));
             }
