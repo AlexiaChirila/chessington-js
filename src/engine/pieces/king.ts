@@ -1,6 +1,7 @@
 import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
+import {getAvailableMovesKing} from "./MovesHelper";
 
 export default class King extends Piece {
     public constructor(player: Player) {
@@ -8,6 +9,6 @@ export default class King extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        return new Array(0);
+        return getAvailableMovesKing(board,board.findPiece(this));
     }
 }

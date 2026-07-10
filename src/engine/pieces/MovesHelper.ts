@@ -53,3 +53,17 @@ export function getAvailableMovesKnight(board: Board, position: Square)  {
 
     return moves;
 }
+
+export function getAvailableMovesKing(board: Board, position: Square)  {
+    let moves:Square[] = [];
+
+    const directions=[[0,1],[0,-1],[1,0],[-1,0],[-1,-1],[-1,1],[1,-1],[1,1]];
+    for( const [dr,dc] of directions) {
+        let r=position.row+dr;
+        let c=position.col+dc;
+        if(r>=0 && r<=7 && c>=0 && c<=7)
+            moves.push(new Square(r,c));
+    }
+
+    return moves;
+}
