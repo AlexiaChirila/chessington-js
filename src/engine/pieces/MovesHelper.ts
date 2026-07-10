@@ -93,7 +93,7 @@ export function getAvailableMovesLinear(board: Board, position: Square, currentP
     return moves;
 }
 
-export function getAvailableMovesKnight(board: Board, position: Square)  {
+export function getAvailableMovesKnight(board: Board, position: Square, currentPlayer:Player)  {
     let moves:Square[] = [];
 
     const directions=[[-2,-1],[-2,1],[-1,-2],[-1,2],[1,-2],[1,2],[2,-1],[2,1]];
@@ -101,7 +101,16 @@ export function getAvailableMovesKnight(board: Board, position: Square)  {
      let r=position.row+dr;
      let c=position.col+dc;
      if(r>=0 && r<=7 && c>=0 && c<=7)
-         moves.push(new Square(r,c));
+
+        if(checkAvailableMove(board, new Square(r,c)))
+            moves.push(new Square(r,c));
+        else if(currentPlayer !== board.getPiece(new Square(r,c))?.player && !(board.getPiece(new Square(r,c))instanceof King))
+        {
+            moves.push(new Square(r,c));
+            break;
+        }
+        else
+            break;
     }
 
     return moves;

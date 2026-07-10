@@ -10,6 +10,6 @@ export default class Knight extends Piece {
 
     public getAvailableMoves(board: Board) {
 
-        return getAvailableMovesKnight(board, board.findPiece(this));
+        return getAvailableMovesKnight(board, board.findPiece(this), this.player);
     }
 }
