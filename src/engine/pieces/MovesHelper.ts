@@ -3,7 +3,7 @@ import Square from "../square";
 import Player from "../player";
 import King from "./king";
 
-export function getAvailableMovesDiagonal(board: Board, position: Square): Square[] {
+export function getAvailableMovesDiagonal(board: Board, position: Square, currentPlayer:Player): Square[] {
     let moves:Square[] = [];
 
     const directions=[[1,-1],[1,1],[-1,1],[-1,-1]];
@@ -19,7 +19,14 @@ export function getAvailableMovesDiagonal(board: Board, position: Square): Squar
                 break;
 
             if(checkAvailableMove(board, new Square(r,c)))
-             moves.push(new Square(r,c));
+            {
+                moves.push(new Square(r,c));
+            }
+            else if(currentPlayer !== board.getPiece(new Square(r,c))?.player && !(board.getPiece(new Square(r,c))instanceof King))
+            {
+                moves.push(new Square(r,c));
+                break;
+            }
         }
     }
     return moves;
