@@ -9,6 +9,6 @@ export default class King extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        return getAvailableMovesKing(board,board.findPiece(this));
+        return getAvailableMovesKing(board,board.findPiece(this),this.player);
     }
 }
