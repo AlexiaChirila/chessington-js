@@ -1,5 +1,7 @@
 import Board from "../board";
 import Square from "../square";
+import Player from "../player";
+import King from "./king";
 
 export function getAvailableMovesDiagonal(board: Board, position: Square): Square[] {
     let moves:Square[] = [];
@@ -23,29 +25,63 @@ export function getAvailableMovesDiagonal(board: Board, position: Square): Squar
     return moves;
 }
 
-export function getAvailableMovesLinear(board: Board, position: Square)  {
+export function getAvailableMovesLinear(board: Board, position: Square, currentPlayer:Player)  {
     let moves:Square[] = [];
 
-    for(let i= 0; i <= 7; i++)
+    for(let i= position.row-1; i >=0; i--)
     {
-        if (i !== position.row )
-        {
-            if(checkAvailableMove(board, new Square(i, position.col)))
+        if(checkAvailableMove(board, new Square(i, position.col)))
                 moves.push(new Square(i, position.col));
-            else
+        else if(currentPlayer !== board.getPiece(new Square(i, position.col))?.player && !(board.getPiece(new Square(i,position.col))instanceof King))
+            {
+                moves.push(new Square(i, position.col));
                 break;
-        }
+            }
+        else
+            break;
+
     }
 
-    for(let i=0;i<=7;i++)
+    for(let i= position.row+1; i <=7; i++)
     {
-        if(i!==position.col)
+        if(checkAvailableMove(board, new Square(i, position.col)))
+            moves.push(new Square(i, position.col));
+        else if(currentPlayer !== board.getPiece(new Square(i, position.col))?.player && !(board.getPiece(new Square(i,position.col))instanceof King))
         {
+            moves.push(new Square(i, position.col));
+            break;
+        }
+        else
+            break;
+
+    }
+
+    for(let i=position.col+1;i<=7;i++)
+    {
             if(checkAvailableMove(board, new Square(position.row,i)))
                 moves.push(new Square(position.row,i));
+            else if(currentPlayer !== board.getPiece(new Square(position.row,i))?.player && !(board.getPiece(new Square(position.row,i))instanceof King))
+            {
+                moves.push(new Square(position.row,i));
+                break;
+            }
             else
                 break;
-        }
+
+    }
+
+    for(let i=position.col-1;i>=0;i--)
+    {
+        if(checkAvailableMove(board, new Square(position.row,i)))
+                moves.push(new Square(position.row,i));
+        else if(currentPlayer !== board.getPiece(new Square(position.row,i))?.player && !(board.getPiece(new Square(position.row,i))instanceof King))
+            {
+                moves.push(new Square(position.row,i));
+                break;
+            }
+        else
+            break;
+
     }
     return moves;
 }

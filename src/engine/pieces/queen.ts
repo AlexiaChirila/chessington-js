@@ -10,7 +10,7 @@ export default class Queen extends Piece {
 
     public getAvailableMoves(board: Board) {
 
-        let movesLinear = getAvailableMovesLinear(board, board.findPiece(this));
+        let movesLinear = getAvailableMovesLinear(board, board.findPiece(this),this.player);
         let movesDiagonal = getAvailableMovesDiagonal(board, board.findPiece(this));
         return [...movesLinear, ...movesDiagonal];
     }
