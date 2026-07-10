@@ -10,8 +10,8 @@ export function getAvailableMovesDiagonal(board: Board, position: Square): Squar
     {
         for(let i=1;i<8;i++)
         {
-            let r=position.row +dr*i;
-            let c=position.col +dc*i;
+            let r = position.row + dr * i;
+            let c = position.col + dc * i;
 
             if(r<0 || r>=7 || c<0 ||c>7)
                 break;
@@ -26,7 +26,8 @@ export function getAvailableMovesDiagonal(board: Board, position: Square): Squar
 export function getAvailableMovesLinear(board: Board, position: Square)  {
     let moves:Square[] = [];
 
-    for(let i=0;i<=7;i++) {
+    for(let i= 0; i <= 7; i++)
+    {
         if (i !== position.row )
         {
             if(checkAvailableMove(board, new Square(i, position.col)))
@@ -40,7 +41,7 @@ export function getAvailableMovesLinear(board: Board, position: Square)  {
     {
         if(i!==position.col)
         {
-            if(checkAvailableMove(board, new Square(i, position.col)))
+            if(checkAvailableMove(board, new Square(position.row,i)))
                 moves.push(new Square(position.row,i));
             else
                 break;
