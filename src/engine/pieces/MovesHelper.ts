@@ -16,8 +16,8 @@ export function getAvailableMovesDiagonal(board: Board, position: Square): Squar
             if(r<0 || r>=7 || c<0 ||c>7)
                 break;
 
-            moves.push(new Square(r,c));
-
+            if(checkAvailableMove(board, new Square(r,c)))
+             moves.push(new Square(r,c));
         }
     }
     return moves;
