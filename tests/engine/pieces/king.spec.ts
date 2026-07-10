@@ -36,10 +36,10 @@ describe('King', () => {
         const king = new King(Player.WHITE);
         board.setPiece(Square.at(0, 0), king);
 
-        const moves = king.getAvailableMoves(board);
+        const moves:Square[] = king.getAvailableMoves(board);
 
         const expectedMoves = [Square.at(0, 1), Square.at(1, 1), Square.at(1, 0)];
 
-        moves.should.deep.have.members(expectedMoves);
+        moves.should.deep.members(expectedMoves);
     });
 });
