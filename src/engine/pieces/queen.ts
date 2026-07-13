@@ -1,6 +1,7 @@
 import Piece from './piece';
 import Player from '../player';
 import Board from '../board';
+import {getAvailableMovesDiagonal, getAvailableMovesLinear} from "./MovesHelper";
 
 export default class Queen extends Piece {
     public constructor(player: Player) {
@@ -8,6 +9,9 @@ export default class Queen extends Piece {
     }
 
     public getAvailableMoves(board: Board) {
-        return new Array(0);
+
+        let movesLinear = getAvailableMovesLinear(board, board.findPiece(this),this.player);
+        let movesDiagonal = getAvailableMovesDiagonal(board, board.findPiece(this),this.player);
+        return [...movesLinear, ...movesDiagonal];
     }
 }
