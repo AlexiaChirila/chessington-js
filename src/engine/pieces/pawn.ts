@@ -3,6 +3,7 @@ import Player from '../player';
 import Board from '../board';
 import Square from "../square";
 import {checkAvailableMove, getAvailableTakesForPawn} from "./MovesHelper";
+import gameSettings from "../gameSettings";
 
 export default class Pawn extends Piece {
     public constructor(player: Player) {
@@ -23,7 +24,7 @@ export default class Pawn extends Piece {
                 }
 
 
-            } else if (position.row < 7) {
+            } else if (position.row < gameSettings.BOARD_SIZE-1) {
                 if (checkAvailableMove(board, new Square(position.row + 1, position.col)))
                     moves.push(new Square(position.row + 1, position.col));
 
